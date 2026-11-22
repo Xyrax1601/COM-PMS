@@ -1,0 +1,12 @@
+{
+  "name": "project-com-pms",
+  "version": "1.0.0",
+  "description": "College of Medicine Patient Management System (COM-PMS)",
+  "scripts": {
+    "start": "node server/dist/index.js",
+    "build:server": "npm --prefix server run build",
+    "build:client": "npm --prefix client run build",
+    "build": "npm run build:server && npm run build:client",
+    "seed": "node server/dist/scripts/seed.js"
+  }
+}

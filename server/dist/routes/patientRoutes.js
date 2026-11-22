@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const patientController_js_1 = require("../controllers/patientController.js");
+const auth_js_1 = require("../middleware/auth.js");
+const router = (0, express_1.Router)();
+router.use(auth_js_1.authenticate);
+router.get('/', patientController_js_1.getPatients);
+router.get('/:id', patientController_js_1.getPatientById);
+router.post('/', (0, auth_js_1.requireRoles)('admin', 'medical', 'registration'), patientController_js_1.createPatient);
+router.put('/:id', (0, auth_js_1.requireRoles)('admin', 'medical', 'registration'), patientController_js_1.updatePatient);
+router.patch('/:id/archive', (0, auth_js_1.requireRoles)('admin', 'medical'), patientController_js_1.archivePatient);
+router.patch('/:id/unarchive', (0, auth_js_1.requireRoles)('admin', 'medical'), patientController_js_1.unarchivePatient);
+router.delete('/:id', (0, auth_js_1.requireRoles)('admin'), patientController_js_1.deletePatient);
+exports.default = router;

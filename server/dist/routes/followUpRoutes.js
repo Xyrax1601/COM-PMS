@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const followUpController_js_1 = require("../controllers/followUpController.js");
+const auth_js_1 = require("../middleware/auth.js");
+const router = (0, express_1.Router)();
+router.use(auth_js_1.authenticate);
+router.get('/', followUpController_js_1.getFollowUps);
+router.post('/', (0, auth_js_1.requireRoles)('admin', 'medical'), followUpController_js_1.createFollowUp);
+router.put('/:id', (0, auth_js_1.requireRoles)('admin', 'medical'), followUpController_js_1.updateFollowUp);
+router.delete('/:id', (0, auth_js_1.requireRoles)('admin'), followUpController_js_1.deleteFollowUp);
+exports.default = router;

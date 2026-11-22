@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const activityLogController_js_1 = require("../controllers/activityLogController.js");
+const auth_js_1 = require("../middleware/auth.js");
+const router = (0, express_1.Router)();
+router.use(auth_js_1.authenticate);
+router.use((0, auth_js_1.requireRoles)('admin', 'viewer'));
+router.get('/', activityLogController_js_1.getActivityLogs);
+exports.default = router;

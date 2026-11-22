@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const monitoringController_js_1 = require("../controllers/monitoringController.js");
+const auth_js_1 = require("../middleware/auth.js");
+const router = (0, express_1.Router)();
+router.use(auth_js_1.authenticate);
+router.get('/summary', monitoringController_js_1.getMonitoringSummary);
+router.get('/category/:category', monitoringController_js_1.getMonitoringCategoryPatients);
+exports.default = router;

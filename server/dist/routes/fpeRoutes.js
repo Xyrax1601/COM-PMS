@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const fpeController_js_1 = require("../controllers/fpeController.js");
+const auth_js_1 = require("../middleware/auth.js");
+const router = (0, express_1.Router)();
+router.use(auth_js_1.authenticate);
+router.get('/', fpeController_js_1.getFpeRecords);
+router.post('/', (0, auth_js_1.requireRoles)('admin', 'medical'), fpeController_js_1.recordFpe);
+router.put('/:id', (0, auth_js_1.requireRoles)('admin', 'medical'), fpeController_js_1.updateFpeRecord);
+exports.default = router;

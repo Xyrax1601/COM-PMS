@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const labController_js_1 = require("../controllers/labController.js");
+const auth_js_1 = require("../middleware/auth.js");
+const router = (0, express_1.Router)();
+router.use(auth_js_1.authenticate);
+router.get('/', labController_js_1.getLabRecords);
+router.post('/', (0, auth_js_1.requireRoles)('admin', 'medical'), labController_js_1.createLabRecord);
+router.put('/:id', (0, auth_js_1.requireRoles)('admin', 'medical'), labController_js_1.updateLabRecord);
+router.delete('/:id', (0, auth_js_1.requireRoles)('admin'), labController_js_1.deleteLabRecord);
+exports.default = router;
